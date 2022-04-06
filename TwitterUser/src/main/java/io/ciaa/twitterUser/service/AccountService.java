@@ -1,46 +1,38 @@
 package io.ciaa.twitterUser.service;
 
+
 import io.ciaa.twitterUser.controller.AccountMessage;
-import io.ciaa.twitterUser.model.Account;
-import io.ciaa.twitterUser.model.AccountFactory;
-import io.ciaa.twitterUser.model.ProfileFactory;
-import io.ciaa.twitterUser.repository.AccountRepository;
+import io.ciaa.twitterUser.modelo.Account;
+import io.ciaa.twitterUser.modelo.AccountFactory;
+import io.ciaa.twitterUser.modelo.ProfileFactory;
+import io.ciaa.twitterUser.repository.AccountRespository;
 import io.ciaa.twitterUser.repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AccountService {
-    private final AccountRepository accountRepository;
+
+    private final AccountRespository accountRespository;
     private final ProfileRepository profileRepository;
+    private final AccountFactory accountFactory;
 
     @Autowired
-    public AccountService(AccountRepository accountRepository, ProfileRepository profileRepository) {
-        this.accountRepository = accountRepository;
+    public AccountService(AccountRespository accountRespository,
+                          ProfileRepository profileRepository,
+                          AccountFactory accountFactory) {
+        this.accountRespository = accountRespository;
         this.profileRepository = profileRepository;
+        this.accountFactory = accountFactory;
     }
 
-    public Account createUser(AccountMessage message) {
-        var newUser = new AccountFactory().create(message.getUserName(), message.getEmail(), message.getPassword());
-        var newProfile = new ProfileFactory().create(message.getName(),newUser, message.getBirthDate(), message.getDescription());
+    public Account createUser(AccountMessage message){
+        var newAccount = new AccountFactory().create(message.getUserName(), message.getEmail(), message.getPassword());
+        var newProfile = new ProfileFactory().create(message.getName(), newAccount, message.getBirthDate(), message.getDescription());
 
-        var createdUser = accountRepository.save(newUser);
-        var createdProfile= profileRepository.save(newProfile);
-        return createdUser;
-    }
+        var createdAccount = accountRespository.save(newAccount);
+        var createdProfile = profileRepository.save(newProfile);
 
-    public AccountMessage updateUser(Long id, AccountMessage message){
-        if(accountRepository.findById(id).isPresent()) {
-            Account existingUser = accountRepository.findById(id).get();
-
-            existingUser.setUserName(message.getUserName());
-            existingUser.setEmail(message.getEmail());
-            existingUser.setPassword(message.getPassword());
-
-            Account updatedUser = accountRepository.save(existingUser);
-
-            return new AccountMessage(updatedUser.getId(), updatedUser.getUserName(), updatedUser.getEmail(), updatedUser.getPassword());
-        } else {return null; }
-
+        return createdAccount;
     }
 }
