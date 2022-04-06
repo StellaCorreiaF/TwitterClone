@@ -28,4 +28,19 @@ public class AccountService {
         var createdProfile= profileRepository.save(newProfile);
         return createdUser;
     }
+
+    public AccountMessage updateUser(Long id, AccountMessage message){
+        if(accountRepository.findById(id).isPresent()) {
+            Account existingUser = accountRepository.findById(id).get();
+
+            existingUser.setUserName(message.getUserName());
+            existingUser.setEmail(message.getEmail());
+            existingUser.setPassword(message.getPassword());
+
+            Account updatedUser = accountRepository.save(existingUser);
+
+            return new AccountMessage(updatedUser.getId(), updatedUser.getUserName(), updatedUser.getEmail(), updatedUser.getPassword());
+        } else {return null; }
+
+    }
 }
