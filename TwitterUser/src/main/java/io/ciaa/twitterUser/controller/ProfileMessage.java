@@ -18,4 +18,8 @@ public class ProfileMessage {
     private LocalDateTime birthDate;
     private String description;
 
+    public ProfileMessage(String name, String description) {
+        this.name = name;
+        this.description= description;
+    }
 }
