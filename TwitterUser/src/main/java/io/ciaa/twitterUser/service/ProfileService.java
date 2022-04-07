@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 public class ProfileService {
 
     private final ProfileRepository profileRepository;
-    private final AccountRespository accountRespository;
+
 
 
     @Autowired
 
-    public ProfileService(ProfileRepository profileRepository, AccountRespository accountRespository) {
+    public ProfileService(ProfileRepository profileRepository) {
         this.profileRepository = profileRepository;
-        this.accountRespository = accountRespository;
+
     }
 
     public ProfileMessage updateProfile(Long id, ProfileMessage profileMessage){
