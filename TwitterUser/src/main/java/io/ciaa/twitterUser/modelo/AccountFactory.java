@@ -14,6 +14,7 @@ public class AccountFactory {
                 .userName(userName)
                 .email(email)
                 .password(password)
+                .lastLog(LocalDateTime.now())
                 .build();
 
         return account;
