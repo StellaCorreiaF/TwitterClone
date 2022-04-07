@@ -2,15 +2,15 @@ package io.ciaa.twitterUser.service;
 
 
 import io.ciaa.twitterUser.controller.AccountMessage;
-import io.ciaa.twitterUser.controller.ProfileMessage;
 import io.ciaa.twitterUser.modelo.Account;
 import io.ciaa.twitterUser.modelo.AccountFactory;
-import io.ciaa.twitterUser.modelo.Profile;
 import io.ciaa.twitterUser.modelo.ProfileFactory;
 import io.ciaa.twitterUser.repository.AccountRespository;
 import io.ciaa.twitterUser.repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AccountService {
@@ -18,13 +18,11 @@ public class AccountService {
     private final AccountRespository accountRespository;
     private final ProfileRepository profileRepository;
 
-    private final AccountFactory accountFactory;
+
 
     @Autowired
-    public AccountService(AccountRespository accountRespository, ProfileRepository profileRepository,
-                          AccountFactory accountFactory) {
+    public AccountService(AccountRespository accountRespository, ProfileRepository profileRepository) {
         this.accountRespository = accountRespository;
-        this.accountFactory = accountFactory;
         this.profileRepository = profileRepository;
     }
 
@@ -37,7 +35,7 @@ public class AccountService {
 
         return createdAccount;
     }
-    public AccountMessage updateProfile(Long id, AccountMessage accountMessage){
+    public AccountMessage updateAccount(Long id, AccountMessage accountMessage){
         if(accountRespository.findById(id).isPresent()){
             Account existingAccount = accountRespository.findById(id).get();
             existingAccount.setEmail(accountMessage.getEmail());
@@ -52,4 +50,10 @@ public class AccountService {
         }
         else {return null; }
     }
+
+    public List<Account> getAccount() {
+        return accountRespository.findAll();
+    }
+
+
 }
