@@ -25,6 +25,4 @@ public class UserController {
     public Account createUser(@RequestBody AccountMessage message){
         return accountService.createUser(message);
     }
-
-
 }
