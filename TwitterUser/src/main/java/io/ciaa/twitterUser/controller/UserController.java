@@ -1,7 +1,6 @@
 package io.ciaa.twitterUser.controller;
 
 import io.ciaa.twitterUser.modelo.Account;
-import io.ciaa.twitterUser.repository.AccountRespository;
 import io.ciaa.twitterUser.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,14 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final AccountService accountService;
-    private final AccountRespository accountRespository;
-
 
     @Autowired
-
-    public UserController(AccountService accountService, AccountRespository accountRespository) {
+    public UserController(AccountService accountService) {
         this.accountService = accountService;
-        this.accountRespository = accountRespository;
     }
 
     @PostMapping
@@ -31,5 +26,5 @@ public class UserController {
         return accountService.createUser(message);
     }
 
-    
+
 }
