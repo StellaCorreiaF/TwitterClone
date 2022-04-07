@@ -2,7 +2,6 @@ package io.ciaa.twitterUser.service;
 
 import io.ciaa.twitterUser.controller.ProfileMessage;
 import io.ciaa.twitterUser.modelo.Profile;
-import io.ciaa.twitterUser.repository.AccountRespository;
 import io.ciaa.twitterUser.repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
