@@ -2,8 +2,10 @@ package io.ciaa.twitterUser.service;
 
 
 import io.ciaa.twitterUser.controller.AccountMessage;
+import io.ciaa.twitterUser.controller.ProfileMessage;
 import io.ciaa.twitterUser.modelo.Account;
 import io.ciaa.twitterUser.modelo.AccountFactory;
+import io.ciaa.twitterUser.modelo.Profile;
 import io.ciaa.twitterUser.modelo.ProfileFactory;
 import io.ciaa.twitterUser.repository.AccountRespository;
 import io.ciaa.twitterUser.repository.ProfileRepository;
@@ -15,15 +17,15 @@ public class AccountService {
 
     private final AccountRespository accountRespository;
     private final ProfileRepository profileRepository;
+
     private final AccountFactory accountFactory;
 
     @Autowired
-    public AccountService(AccountRespository accountRespository,
-                          ProfileRepository profileRepository,
+    public AccountService(AccountRespository accountRespository, ProfileRepository profileRepository,
                           AccountFactory accountFactory) {
         this.accountRespository = accountRespository;
-        this.profileRepository = profileRepository;
         this.accountFactory = accountFactory;
+        this.profileRepository = profileRepository;
     }
 
     public Account createUser(AccountMessage message){
@@ -34,5 +36,20 @@ public class AccountService {
         var createdProfile = profileRepository.save(newProfile);
 
         return createdAccount;
+    }
+    public AccountMessage updateProfile(Long id, AccountMessage accountMessage){
+        if(accountRespository.findById(id).isPresent()){
+            Account existingAccount = accountRespository.findById(id).get();
+            existingAccount.setEmail(accountMessage.getEmail());
+            existingAccount.setPassword(accountMessage.getPassword());
+            existingAccount.setUserName(accountMessage.getUserName());
+
+            Account updatedAccount = accountRespository.save(existingAccount);
+            return new AccountMessage(updatedAccount.getId(),
+                    updatedAccount.getUserName(),
+                    updatedAccount.getEmail(),
+                    updatedAccount.getPassword());
+        }
+        else {return null; }
     }
 }
