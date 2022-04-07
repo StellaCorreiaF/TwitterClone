@@ -26,4 +26,10 @@ public class AccountMessage {
     private String description;
 
 
+    public AccountMessage(Long id, String userName, String email, String password) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+
+    }
 }
