@@ -19,4 +19,10 @@ public class ProfileMessage {
     private String description;
 
 
+    public ProfileMessage(Long id, String name, String description, LocalDateTime birthDate) {
+
+        this.name = name;
+        this.description = description;
+        this.birthDate = birthDate;
+    }
 }
