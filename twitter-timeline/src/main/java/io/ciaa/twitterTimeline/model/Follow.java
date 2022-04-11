@@ -2,10 +2,12 @@ package io.ciaa.twitterTimeline.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.ciaa.twitterTimeline.FollowDto;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 
@@ -18,11 +20,11 @@ import java.io.Serializable;
 @Setter
 
 public class Follow implements Serializable {
-
     @Id
-    Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private Long follower;
+    private String follower;
 
-    private Long followed;
+    private String followed;
 }

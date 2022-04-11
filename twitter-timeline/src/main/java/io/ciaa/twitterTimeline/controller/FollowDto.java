@@ -1,6 +1,5 @@
-package io.ciaa.twitterTimeline;
+package io.ciaa.twitterTimeline.controller;
 
-import io.ciaa.twitterTimeline.model.Follow;
 import lombok.*;
 
 @NoArgsConstructor
@@ -10,9 +9,8 @@ import lombok.*;
 @Getter
 @Setter
 public class FollowDto {
-
     private Long userFollowerId;
     private Long userFollowedId;
 
-    private Follow follow;
+
 }
