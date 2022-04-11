@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.net.URL;
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -21,6 +23,8 @@ public class Tweet implements Serializable {
     private Long id;
 
     private String tweet;
-    private Long userId;
+    private String userName;
+    private LocalDateTime schedule;
+    private URL midia;
 
 }
