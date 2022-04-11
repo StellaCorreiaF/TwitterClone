@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(value = "users", url = "http://localhost:8082")
 public interface UserClient {
 
-    @RequestMapping(method = RequestMethod.POST, value = "/users/{userid")
+    @RequestMapping(method = RequestMethod.GET, value = "/users/{userid}")
     UserDto get(@PathVariable("userid") Long userId);
 }
