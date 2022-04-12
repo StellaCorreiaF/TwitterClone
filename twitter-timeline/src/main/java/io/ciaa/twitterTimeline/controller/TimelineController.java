@@ -2,7 +2,8 @@ package io.ciaa.twitterTimeline.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.ciaa.twitterTimeline.adapter.UserClient;
-import io.ciaa.twitterTimeline.adapter.dto.UserDto;
+import io.ciaa.twitterTimeline.model.Timeline;
+import io.ciaa.twitterTimeline.service.TimeLineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +20,14 @@ public class TimelineController {
     @Autowired
     UserClient userClient;
 
-    @GetMapping("/users/{id}")
-    //posso excluir o parametro e inserir diretamente na requisiçao
-    public UserDto createUser(@PathVariable Long id) {
-        return userClient.get(id);
+    @Autowired
+    TimeLineService timeLineService;
+
+    @GetMapping("/{id}")
+    public Timeline getTimeline(@PathVariable Long id) {
+        var user = userClient.get(id);
+        var timeline =  timeLineService.timeline(user.getUserName());
+
+        return timeline;
     }
 }
