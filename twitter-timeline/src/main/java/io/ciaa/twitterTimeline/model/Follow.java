@@ -2,6 +2,7 @@ package io.ciaa.twitterTimeline.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ import java.io.Serializable;
 @Builder
 @Getter
 @Setter
+@JsonSerialize
 
 public class Follow implements Serializable {
     @Id
