@@ -5,10 +5,7 @@ import io.ciaa.twitterTimeline.repository.FollowRepository;
 import io.ciaa.twitterTimeline.service.FollowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Component
@@ -27,4 +24,10 @@ public class FollowController {
     public Follow followUser(@RequestBody FollowDto dto){
         return followService.followUser(dto);
     }
+
+    @GetMapping("/{userid}")
+    public Follow getFollows(@PathVariable("userid") Long userid) {
+        return followRepository.getById(userid);
+    }
+    // criar um endpoint para retornar os usuarios @GettMapping("/id")
 }
