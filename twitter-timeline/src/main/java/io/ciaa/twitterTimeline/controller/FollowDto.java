@@ -11,6 +11,4 @@ import lombok.*;
 public class FollowDto {
     private Long userFollowerId;
     private Long userFollowedId;
-
-
 }
