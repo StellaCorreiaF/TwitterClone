@@ -1,7 +1,6 @@
 package io.ciaa.twitterTimeline.service;
 
 import io.ciaa.twitterTimeline.adapter.UserClient;
-
 import io.ciaa.twitterTimeline.controller.FollowDto;
 import io.ciaa.twitterTimeline.model.Follow;
 import io.ciaa.twitterTimeline.model.FollowFactory;
@@ -41,8 +40,5 @@ public class FollowService {
         Follow follower = followRepository.findByFollowedAndFollower(followerId, followedId).orElse(null);
 
         followRepository.delete(follower);
-
-
-
     }
 }
