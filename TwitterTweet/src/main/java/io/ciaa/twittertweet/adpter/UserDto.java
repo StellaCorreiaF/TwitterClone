@@ -11,5 +11,4 @@ import lombok.*;
 public class UserDto {
     String email;
     String userName;
-
 }
