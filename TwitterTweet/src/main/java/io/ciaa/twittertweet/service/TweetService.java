@@ -9,6 +9,8 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 
 public class TweetService {
@@ -32,4 +34,8 @@ public class TweetService {
     }
 
 
+    public List<Tweet> getTweets(String userName) {
+        return tweetRepository.getByUserName(userName);
+
+    }
 }
