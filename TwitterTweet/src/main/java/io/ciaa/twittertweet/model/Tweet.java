@@ -1,8 +1,7 @@
 package io.ciaa.twittertweet.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,11 +11,14 @@ import java.io.Serializable;
 import java.net.URL;
 import java.time.LocalDateTime;
 
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
+@Getter
+@Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Tweet implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
