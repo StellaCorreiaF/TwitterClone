@@ -8,6 +8,7 @@ import io.ciaa.twitterUser.modelo.ProfileFactory;
 import io.ciaa.twitterUser.repository.AccountRespository;
 import io.ciaa.twitterUser.repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +28,13 @@ public class AccountService {
     }
 
     public Account createUser(AccountMessage message){
-        var newAccount = new AccountFactory().create(message.getUserName(), message.getEmail(), message.getPassword());
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String passwordcripto = encoder.encode(message.getPassword());
+        message.setPassword(passwordcripto);
+
+
+        var newAccount = new AccountFactory().create(message.getUserName(), message.getEmail(), passwordcripto);
         var newProfile = new ProfileFactory().create(message.getName(), newAccount, message.getBirthDate(), message.getDescription());
 
         var createdAccount = accountRespository.save(newAccount);

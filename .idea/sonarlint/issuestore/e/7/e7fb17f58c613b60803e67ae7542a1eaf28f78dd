@@ -1,0 +1,6 @@
+
+^
+java:S4488"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ËŒœã
+^
+java:S4488"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(àÞç”
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÌÀŸ†ÿÿÿÿÿ
